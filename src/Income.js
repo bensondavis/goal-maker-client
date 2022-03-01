@@ -3,7 +3,6 @@ import DropDown from "./DropDown";
 const Income = ({ frequencyType, value, onChange, frequencies }) => {
   function handleChange(name, _value) {
     const income = { frequencyType, value, [name]: _value };
-    console.log({income})
     onChange(income);
   }
   

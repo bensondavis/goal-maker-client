@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Income from "./Income";
 
@@ -23,6 +23,7 @@ function App() {
     { frequencyType: "MONTHLY", value: "" },
   ]);
   const [sumIncome, setSumIncome] = useState(0);
+  const [sumExpense, setSumExpense] = useState(0);
 
   function handleBalance(event) {
     setBankBalance(event.target.value);
@@ -44,19 +45,25 @@ function App() {
     setExpenses(newExpenses);
   }
 
-  
   function handleSubmit() {
-    console.log(incomes);
-    console.log(expenses);
-    const res = Sum(incomes);
-    console.log(res);
-    setSumIncome(res);
+    console.log("submit");
 
-    console.log({sumIncome});
+    const resI = Sum(incomes);
+    const resE = Sum(expenses);
 
-    // const result = (goal - bankBalance) / (incomes - expenses);
-    // alert(`result: ${result}`);
+    console.log("resi = ", resI);
+    console.log("resE = ", resE);
+    setSumIncome(resI);
+    setSumExpense(resE);
+
+    let result = Math.floor((goal - bankBalance) / (resI - resE));
+
+    alert(`result: ${result}`);
   }
+
+  // useEffect(() => {
+  //   console.log({ sumIncome });
+  // }, [sumIncome]);
 
   function handleAddIncome() {
     const newIncomes = [...incomes, { frequencyType: "MONTHLY", value: "" }];
@@ -70,57 +77,57 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header"></header>
 
-      </header>
-
-        <div className="body">
-          <div>
-            <h4>Bank Balance:</h4>
-            <input
-              type="text"
-              value={bankBalance}
-              onChange={(e) => handleBalance(e)}
-            />
-          </div>
-          <div>
-            <h4>income amount:</h4>
-            {incomes.map(({ frequencyType, value }, i) => {
-              return (
-                <Income
-                  key={i}
-                  frequencies={frequencies}
-                  frequencyType={frequencyType}
-                  value={value}
-                  onChange={(income) => handleIncomes(income, i)}
-                />
-              );
-            })}
-
-            <button onClick={handleAddIncome}>add</button>
-          </div>
-          <div>
-            <h4>expense amount:</h4>
-            {expenses.map(({ frequencyType, value }, i) => {
-              return (
-                <Expense
-                  key={i}
-                  frequencies={frequencies}
-                  frequencyType={frequencyType}
-                  value={value}
-                  onChange={(expense) => handleExpenses(expense, i)}
-                />
-              );
-            })}
-            <button onClick={handleAddExpense}>add</button>
-          </div>
-          <div>
-            <h4>goal amount:</h4>
-            <input type="text" value={goal} onChange={(e) => handleGoal(e)} />
-          </div>
-
-          <button onClick={handleSubmit}>submit</button>
+      <div className="body">
+        <div>
+          <h4>Bank Balance:</h4>
+          <input
+            type="text"
+            value={bankBalance}
+            onChange={(e) => handleBalance(e)}
+          />
         </div>
+        <div>
+          <h4>income amount:</h4>
+          {incomes.map(({ frequencyType, value }, i) => {
+            return (
+              <Income
+                key={i}
+                frequencies={frequencies}
+                frequencyType={frequencyType}
+                value={value}
+                onChange={(income) => handleIncomes(income, i)}
+              />
+            );
+          })}
+
+          <button onClick={handleAddIncome}>add</button>
+        </div>
+        <div>
+          <h4>expense amount:</h4>
+          {expenses.map(({ frequencyType, value }, i) => {
+            return (
+              <Expense
+                key={i}
+                frequencies={frequencies}
+                frequencyType={frequencyType}
+                value={value}
+                onChange={(expense) => handleExpenses(expense, i)}
+              />
+            );
+          })}
+          <button onClick={handleAddExpense}>add</button>
+        </div>
+        <div>
+          <h4>goal amount:</h4>
+          <input type="text" value={goal} onChange={(e) => handleGoal(e)} />
+        </div>
+
+        <button onClick={handleSubmit}>submit</button>
+
+        
+      </div>
     </div>
   );
 }
