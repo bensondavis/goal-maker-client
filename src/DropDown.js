@@ -1,8 +1,8 @@
 const DropDown = ({ list, onChange, selectedValue }) => {
   return (
-    <select onChange={(e)=>onChange(e.target.value)}>
+    <select className="drop-down border-none pad font-drop " onChange={(e)=>onChange(e.target.value)}>
       {list.map((item, i) => (
-        <option
+        <option 
           key={i}
           value={item.value}
           selected={item.value === selectedValue}
