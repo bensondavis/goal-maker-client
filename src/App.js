@@ -9,7 +9,7 @@ import CustomPopup from "./CustomPopup";
 import convert from "./Convert";
 
 const frequencies = [
-  { text: "Day", value: "DAY" },
+  { text: "Daily", value: "DAY" },
   { text: "Weekly", value: "WEEKLY" },
   { text: "Monthly", value: "MONTHLY" },
   { text: "Yearly", value: "YEARLY" },
@@ -54,18 +54,16 @@ function App() {
   }
 
   function handleSubmit() {
-    console.log("submit");
-
     const resI = Sum(incomes);
     const resE = Sum(expenses);
-
-    console.log("resi = ", resI);
-    console.log("resE = ", resE);
+    console.log("sum of incomes =",resI)
+    console.log("sum of expenses =",resE)
     setSumIncome(resI);
     setSumExpense(resE);
 
-    let res = Math.floor((goal - bankBalance) / (resI - resE));
-    setResult(convert(res));
+    let res = Math.round((goal - bankBalance) / (resI - resE));
+    console.log("res = ",res);
+    setResult(convert(res, goal, bankBalance));
     //alert(`result: ${result}`);
   }
 
@@ -86,77 +84,75 @@ function App() {
   return (
     <div className="App">
       <header className="App-header flex justify-between pad">
-      <img className="flex justify-center items align" src="./gg1.png" alt="" />
-      <div className="flex items-align" >
-      <i class="gg-profile font-color m-20"></i>
-      <button className="font-lato bg-color-branded-teal font-color border-none rounded-border pad font-bold">LOG OUT</button>
-      </div>
+        <img
+          className="flex justify-center items align"
+          src="./gg1.png"
+          alt=""
+        />
+        <div className="flex items-align">
+          <i class="gg-profile font-color m-20"></i>
+          <button className="font-lato bg-color-branded-teal font-color border-none rounded-border pad font-bold">
+            LOG OUT
+          </button>
+        </div>
       </header>
-        <div className="body m-20 p-10 rounded-main">
+      <div className="body m-20 p-10 rounded-main">
         <ul>
-        <li><a class="btn">Details</a></li>
+          <li>
+            <a class="btn">Details</a>
+          </li>
         </ul>
-            <label for="bankBalance">Current Balance</label>
-            <input class="form-styling"
-              type="text"
-              value={bankBalance}
-              onChange={(e) => handleBalance(e)}
+        <label for="bankBalance">Current Balance</label>
+        <input
+          class="form-styling"
+          type="text"
+          value={bankBalance}
+          onChange={(e) => handleBalance(e)}
+        />
+        <label for="incomeAmount">Income Amount:</label>
+        {incomes.map(({ frequencyType, value }, i) => {
+          return (
+            <Income
+              key={i}
+              frequencies={frequencies}
+              frequencyType={frequencyType}
+              value={value}
+              onChange={(income) => handleIncomes(income, i)}
             />
-            <label for="incomeAmount">Income Amount:</label>
-            {incomes.map(({ frequencyType, value }, i) => {
-              return (
-                <Income 
-                  key={i}
-                  frequencies={frequencies}
-                  frequencyType={frequencyType}
-                  value={value}
-                  onChange={(income) => handleIncomes(income, i)}
-                />
-              );
-            })}
+          );
+        })}
 
-            <button class="add-button border-none pad" onClick={handleAddIncome}><i class="gg-add"></i></button>
-            <label for="expenseAmount">expense amount:</label>
-            {expenses.map(({ frequencyType, value }, i) => {
-              return (
-                <Expense class="form-styling"
-                  key={i}
-                  frequencies={frequencies}
-                  frequencyType={frequencyType}
-                  value={value}
-                  onChange={(expense) => handleExpenses(expense, i)}
-                />
-              );
-            })}
-            <button class="add-button border-none pad " onClick={handleAddIncome}><i class="gg-add"></i></button>
-            <label for="goalAmount">Goal Amount:</label>
-            <input class="form-styling" type="text" value={goal} onChange={(e) => handleGoal(e)} />
-          <button class="border-none pad rounded-border m-auto font-size font-bold font-drop block"onClick={handleSubmit}>Submit</button>
-          <div class="bottom ">
-          </div>
-        </div>
-        <div>
-          <h4>expense amount:</h4>
-          {expenses.map(({ frequencyType, value }, i) => {
-            return (
-              <Expense
-                key={i}
-                frequencies={frequencies}
-                frequencyType={frequencyType}
-                value={value}
-                onChange={(expense) => handleExpenses(expense, i)}
-              />
-            );
-          })}
-          <button onClick={handleAddExpense}>add</button>
-        </div>
-        <div>
-          <h4>goal amount:</h4>
-          <input type="text" value={goal} onChange={(e) => handleGoal(e)} />
-        </div>
+        <button class="add-button border-none pad" onClick={handleAddIncome}>
+          <i class="gg-add"></i>
+        </button>
 
-        {/* <button onClick={handleSubmit}>submit</button> */}
+        <label for="expenseAmount">expense amount:</label>
+        {expenses.map(({ frequencyType, value }, i) => {
+          return (
+            <Expense
+              class="form-styling"
+              key={i}
+              frequencies={frequencies}
+              frequencyType={frequencyType}
+              value={value}
+              onChange={(expense) => handleExpenses(expense, i)}
+            />
+          );
+        })}
+
+        <button class="add-button border-none pad " onClick={handleAddExpense}>
+          <i class="gg-add"></i>
+        </button>
+
+        <label for="goalAmount">Goal Amount:</label>
+        <input
+          class="form-styling"
+          type="text"
+          value={goal}
+          onChange={(e) => handleGoal(e)}
+        />
         <button
+          class="border-none pad rounded-border m-auto font-size font-bold font-drop block"
           onClick={(e) => {
             setVisibility(!visibility);
             handleSubmit();
@@ -164,16 +160,25 @@ function App() {
         >
           Submit
         </button>
-
         <CustomPopup
           onClose={popupCloseHandler}
           show={visibility}
           title="Result"
         >
           <h1></h1>
-          <h2>Your goal can be achieved in {result}</h2>
+          <h2>{result}</h2>
         </CustomPopup>
+        <div class="bottom "></div>
       </div>
+
+      {/* <button
+        onClick={(e) => {
+          setVisibility(!visibility);
+          handleSubmit();
+        }}
+      >
+        Submit
+      </button> */}
     </div>
   );
 }
