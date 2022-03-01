@@ -4,6 +4,7 @@ import Income from "./Income";
 
 import "./App.css";
 import Expense from "./Expense";
+import Sum from "./Sum";
 
 const frequencies = [
   { text: "Day", value: "DAY" },
@@ -21,6 +22,7 @@ function App() {
   const [expenses, setExpenses] = useState([
     { frequencyType: "MONTHLY", value: "" },
   ]);
+  const [sumIncome, setSumIncome] = useState(0);
 
   function handleBalance(event) {
     setBankBalance(event.target.value);
@@ -31,22 +33,27 @@ function App() {
   }
 
   function handleIncomes(income, i) {
-    console.log(income, i);
     const newIncomes = [...incomes];
     newIncomes[i] = income;
     setIncomes(newIncomes);
   }
 
   function handleExpenses(expense, i) {
-    console.log(expense, i);
     const newExpenses = [...expenses];
     newExpenses[i] = expense;
     setExpenses(newExpenses);
   }
 
+  
   function handleSubmit() {
     console.log(incomes);
     console.log(expenses);
+    const res = Sum(incomes);
+    console.log(res);
+    setSumIncome(res);
+
+    console.log({sumIncome});
+
     // const result = (goal - bankBalance) / (incomes - expenses);
     // alert(`result: ${result}`);
   }
@@ -64,8 +71,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
+
       </header>
+
         <div className="body">
           <div>
             <h4>Bank Balance:</h4>
