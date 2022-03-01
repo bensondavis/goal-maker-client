@@ -1,6 +1,6 @@
 function convert(result, goal, bankBalance) {
     if(bankBalance > goal) {
-        return("Your goal have been achieved");
+        return("Your goal have been achieved!");
     }
 
     let year = 0, month = 0;
