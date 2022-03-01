@@ -4,7 +4,6 @@ const Expense = ({ frequencyType, value, onChange, frequencies }) => {
     
   function handleChange(name, _value) {
     const expense = { frequencyType, value, [name]: _value };
-    console.log({expense})
     onChange(expense);
   }
   
