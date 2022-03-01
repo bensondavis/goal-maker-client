@@ -54,18 +54,15 @@ function App() {
   }
 
   function handleSubmit() {
-    console.log("submit");
 
     const resI = Sum(incomes);
     const resE = Sum(expenses);
 
-    console.log("resi = ", resI);
-    console.log("resE = ", resE);
     setSumIncome(resI);
     setSumExpense(resE);
 
     let res = Math.floor((goal - bankBalance) / (resI - resE));
-    setResult(convert(res));
+    setResult(convert(res, goal, bankBalance));
     //alert(`result: ${result}`);
   }
 
@@ -148,7 +145,7 @@ function App() {
           title="Result"
         >
           <h1></h1>
-          <h2>Your goal can be achieved in {result}</h2>
+          <h2>{result}</h2>
         </CustomPopup>
       </div>
     </div>
