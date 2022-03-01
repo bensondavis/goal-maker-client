@@ -5,6 +5,8 @@ import Income from "./Income";
 import "./App.css";
 import Expense from "./Expense";
 import Sum from "./Sum";
+import CustomPopup from "./CustomPopup";
+import convert from "./Convert";
 
 const frequencies = [
   { text: "Day", value: "DAY" },
@@ -24,6 +26,12 @@ function App() {
   ]);
   const [sumIncome, setSumIncome] = useState(0);
   const [sumExpense, setSumExpense] = useState(0);
+  const [result, setResult] = useState("");
+  const [visibility, setVisibility] = useState(false);
+
+  const popupCloseHandler = (e) => {
+    setVisibility(e);
+  };
 
   function handleBalance(event) {
     setBankBalance(event.target.value);
@@ -56,9 +64,9 @@ function App() {
     setSumIncome(resI);
     setSumExpense(resE);
 
-    let result = Math.floor((goal - bankBalance) / (resI - resE));
-
-    alert(`result: ${result}`);
+    let res = Math.floor((goal - bankBalance) / (resI - resE));
+    setResult(convert(res));
+    //alert(`result: ${result}`);
   }
 
   // useEffect(() => {
@@ -124,9 +132,24 @@ function App() {
           <input type="text" value={goal} onChange={(e) => handleGoal(e)} />
         </div>
 
-        <button onClick={handleSubmit}>submit</button>
+        {/* <button onClick={handleSubmit}>submit</button> */}
+        <button
+          onClick={(e) => {
+            setVisibility(!visibility);
+            handleSubmit();
+          }}
+        >
+          Submit
+        </button>
 
-        
+        <CustomPopup
+          onClose={popupCloseHandler}
+          show={visibility}
+          title="Result"
+        >
+          <h1></h1>
+          <h2>Your goal can be achieved in {result}</h2>
+        </CustomPopup>
       </div>
     </div>
   );

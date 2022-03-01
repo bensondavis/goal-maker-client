@@ -1,5 +1,6 @@
-let a = 5;
-let b = '12';
-let c = (+b + a).toString();
-console.log(c)
-console.log(typeof(c));
+let a = 37;
+let b = 12;
+let c = Math.round(a/b);
+let rem = a%b;
+console.log(c);
+console.log(rem)
