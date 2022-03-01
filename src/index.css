@@ -16,6 +16,9 @@ code {
 }
 .App-header {
   background-color: #000044;
+  position: sticky;
+  top: 0;
+  height: 50px;
 }
 
 .flex{
@@ -71,6 +74,7 @@ code {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .form-styling{
   width: 60%;
@@ -120,7 +124,8 @@ label {
 .add-button{
   border-radius: 9999px;
   background-color: transparent;
-  color:white
+  color:white;
+  margin-left: 370px;
 }
 .font-size{
   font-size: 15px;
@@ -151,6 +156,6 @@ label {
   font-weight: bold;
 }
 img{
-  width: 170px;
-  height: 70px;
+  width: 120px;
+  height: 50px;
 }
