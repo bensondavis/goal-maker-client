@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, useEffect } from "react";
 
 import Income from "./Income";
 
@@ -24,8 +24,7 @@ function App() {
   const [expenses, setExpenses] = useState([
     { frequencyType: "MONTHLY", value: "" },
   ]);
-  // const [sumIncome, setSumIncome] = useState(0);
-  // const [sumExpense, setSumExpense] = useState(0);
+  const [safe, setSafe] = useState(0);
   const [result, setResult] = useState("");
   const [visibility, setVisibility] = useState(false);
 
@@ -56,11 +55,14 @@ function App() {
   function handleSubmit() {
     const resI = Sum(incomes);
     const resE = Sum(expenses);
-    // setSumIncome(resI);
-    // setSumExpense(resE);
 
-    let res = Math.round((goal - bankBalance) / (resI - resE));
-    setResult(convert(res, goal, bankBalance));
+    const res = ((goal - bankBalance) / (resI - resE));
+    if (goal && bankBalance) {
+      if(goal < bankBalance) {
+        setSafe(1);
+      }
+    }
+    setResult(convert(res, safe));
   }
 
   function handleAddIncome() {
@@ -91,7 +93,9 @@ function App() {
       <div className="body m-20 p-10 rounded-main">
         <ul>
           <li>
-            <a class="btn" href="#" >Details</a>
+            <a class="btn" href="#">
+              Details
+            </a>
           </li>
         </ul>
         <label for="bankBalance">Current Balance:</label>

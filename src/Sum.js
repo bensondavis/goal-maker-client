@@ -19,7 +19,6 @@ function Sum(list) {
 
     res += x;
   }
-
   return res;
 }
 
