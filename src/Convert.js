@@ -8,8 +8,16 @@ function convert(result, safe) {
     year = Math.round(result / 12);
     month = result % 12;
     if (month !== 0) {
+      if (Math.round(month) == 12) {
+        year = year + 1;
+        return "Your goal can be achieved in " + year + " years";
+      }
       return (
-        "Your goal can be achieved in " + year + " year and " + Math.round(month) + " month"
+        "Your goal can be achieved in " +
+        year +
+        " year and " +
+        Math.round(month) +
+        " month"
       );
     } else {
       return "Your goal can be achieved in " + year + " year";
