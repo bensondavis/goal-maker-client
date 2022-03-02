@@ -24,7 +24,7 @@ function App() {
   const [expenses, setExpenses] = useState([
     { frequencyType: "MONTHLY", value: "" },
   ]);
-  const [safe, setSafe] = useState(0);
+  const [safe, setSafe] = useState(false);
   const [result, setResult] = useState("");
   const [visibility, setVisibility] = useState(false);
 
@@ -56,13 +56,14 @@ function App() {
     const resI = Sum(incomes);
     const resE = Sum(expenses);
 
-    const res = ((goal - bankBalance) / (resI - resE));
+    const res = Math.round((goal - bankBalance) / (resI - resE));
     if (goal && bankBalance) {
       if(goal < bankBalance) {
-        setSafe(1);
+        setSafe(true);
       }
     }
     setResult(convert(res, safe));
+    setSafe(0);
   }
 
   function handleAddIncome() {
