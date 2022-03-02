@@ -159,3 +159,20 @@ img{
   width: 120px;
   height: 50px;
 }
+
+.bg-color-branded-teal:hover {
+  transform: scale(1.2);
+}
+
+.gg-profile:hover {
+  transform: scale(1.2);
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+}

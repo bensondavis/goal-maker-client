@@ -24,8 +24,7 @@ function App() {
   const [expenses, setExpenses] = useState([
     { frequencyType: "MONTHLY", value: "" },
   ]);
-  const [sumIncome, setSumIncome] = useState(0);
-  const [sumExpense, setSumExpense] = useState(0);
+  const [safe, setSafe] = useState(0);
   const [result, setResult] = useState("");
   const [visibility, setVisibility] = useState(false);
 
@@ -56,20 +55,15 @@ function App() {
   function handleSubmit() {
     const resI = Sum(incomes);
     const resE = Sum(expenses);
-    console.log("sum of incomes =",resI)
-    console.log("sum of expenses =",resE)
-    setSumIncome(resI);
-    setSumExpense(resE);
 
-    let res = Math.round((goal - bankBalance) / (resI - resE));
-    console.log("res = ",res);
-    setResult(convert(res, goal, bankBalance));
-    //alert(`result: ${result}`);
+    const res = ((goal - bankBalance) / (resI - resE));
+    if (goal && bankBalance) {
+      if(goal < bankBalance) {
+        setSafe(1);
+      }
+    }
+    setResult(convert(res, safe));
   }
-
-  // useEffect(() => {
-  //   console.log({ sumIncome });
-  // }, [sumIncome]);
 
   function handleAddIncome() {
     const newIncomes = [...incomes, { frequencyType: "MONTHLY", value: "" }];
@@ -99,16 +93,19 @@ function App() {
       <div className="body m-20 p-10 rounded-main">
         <ul>
           <li>
-            <a class="btn">Details</a>
+            <a class="btn" href="#">
+              Details
+            </a>
           </li>
         </ul>
-        <label for="bankBalance">Current Balance</label>
+        <label for="bankBalance">Current Balance:</label>
         <input
           class="form-styling"
           type="text"
           value={bankBalance}
           onChange={(e) => handleBalance(e)}
         />
+        <div className="m-20"></div>
         <label for="incomeAmount">Income Amount:</label>
         {incomes.map(({ frequencyType, value }, i) => {
           return (
@@ -152,7 +149,7 @@ function App() {
           onChange={(e) => handleGoal(e)}
         />
         <button
-          class="border-none pad rounded-border m-auto font-size font-bold font-drop block"
+          className="border-none pad rounded-border m-auto font-size font-bold font-drop block"
           onClick={(e) => {
             setVisibility(!visibility);
             handleSubmit();
@@ -170,15 +167,9 @@ function App() {
         </CustomPopup>
         <div class="bottom "></div>
       </div>
-
-      {/* <button
-        onClick={(e) => {
-          setVisibility(!visibility);
-          handleSubmit();
-        }}
-      >
-        Submit
-      </button> */}
+      <footer className="items-align flex justify-center">
+        <p>&copy; 2022 ABCD Team</p>
+      </footer>
     </div>
   );
 }
