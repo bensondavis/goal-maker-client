@@ -9,7 +9,7 @@ function convert(result, safe) {
     month = result % 12;
     if (month !== 0) {
       return (
-        "Your goal can be achieved in " + year + " year and " + month + " month"
+        "Your goal can be achieved in " + year + " year and " + Math.ceil(month) + " month"
       );
     } else {
       return "Your goal can be achieved in " + year + " year";
