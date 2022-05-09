@@ -1,5 +1,6 @@
 import DropDown from "./DropDown";
-import "./App.css";
+import TextField from "@mui/material/TextField";
+
 const Income = ({ frequencyType, value, onChange, frequencies }) => {
   function handleChange(name, _value) {
     const income = { frequencyType, value, [name]: _value };
@@ -8,12 +9,15 @@ const Income = ({ frequencyType, value, onChange, frequencies }) => {
 
   return (
     <div>
-      <input
-        class="form-styling"
-        type="text"
+      <TextField
+        label="Income Amount"
         value={value}
-        onChange={(e) => handleChange("value", e.target.value)}
+        variant="outlined"
+        onChange={(e) => {
+          handleChange("value", e.target.value);
+        }}
       />
+
       <DropDown
         list={frequencies}
         selectedValue={frequencyType}
