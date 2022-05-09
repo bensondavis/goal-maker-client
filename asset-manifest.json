@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/goal-maker-client/static/css/main.011f2a54.css",
-    "main.js": "/goal-maker-client/static/js/main.fce8a9ce.js",
+    "main.css": "/goal-maker-client/static/css/main.178e8700.css",
+    "main.js": "/goal-maker-client/static/js/main.68c8b2ac.js",
     "static/js/787.f25c6d3b.chunk.js": "/goal-maker-client/static/js/787.f25c6d3b.chunk.js",
     "index.html": "/goal-maker-client/index.html",
-    "main.011f2a54.css.map": "/goal-maker-client/static/css/main.011f2a54.css.map",
-    "main.fce8a9ce.js.map": "/goal-maker-client/static/js/main.fce8a9ce.js.map",
+    "main.178e8700.css.map": "/goal-maker-client/static/css/main.178e8700.css.map",
+    "main.68c8b2ac.js.map": "/goal-maker-client/static/js/main.68c8b2ac.js.map",
     "787.f25c6d3b.chunk.js.map": "/goal-maker-client/static/js/787.f25c6d3b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.011f2a54.css",
-    "static/js/main.fce8a9ce.js"
+    "static/css/main.178e8700.css",
+    "static/js/main.68c8b2ac.js"
   ]
 }
