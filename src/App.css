@@ -14,3 +14,7 @@ body {
 .submit-button {
     width: 220px;
 }
+
+.centering {
+    margin-top: calc((100vh - (514.5px + 48px))/2);
+}
