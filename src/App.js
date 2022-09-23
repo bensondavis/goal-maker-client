@@ -77,6 +77,7 @@ const App = () => {
     <div className="app">
       <DenseAppBar />
       <Stack
+        className="centering"
         direction={"column"}
         alignItems={"center"}
         justifyContent="center"
