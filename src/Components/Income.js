@@ -1,5 +1,6 @@
 import DropDown from "./DropDown";
 import TextField from "@mui/material/TextField";
+import "../App.css";
 
 const Income = ({ frequencyType, value, onChange, frequencies }) => {
   function handleChange(name, _value) {
@@ -8,7 +9,7 @@ const Income = ({ frequencyType, value, onChange, frequencies }) => {
   }
 
   return (
-    <div>
+    <div className="entry">
       <TextField
         label="Income Amount"
         value={value}
