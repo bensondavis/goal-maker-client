@@ -77,16 +77,17 @@ const App = () => {
     <div className="app">
       <DenseAppBar />
       <Stack
+        className="centering"
         direction={"column"}
         alignItems={"center"}
-        justifyContent="center"
+        justifyContent={"center"}
       >
         <TextField
           label="Current Balance"
           variant="outlined"
           value={bankBalance}
           onChange={(e) => handleBalance(e)}
-          sx={{ mt: 2, mb: 2, ml:-15 }}
+          sx={{ mt: 2, mb: 2, ml: -15 }}
         />
 
         <div>
@@ -134,12 +135,12 @@ const App = () => {
           variant="outlined"
           value={goal}
           onChange={(e) => handleGoal(e)}
-          sx={{ mt: 2, mb: 2, ml:-15 }}
+          sx={{ mt: 2, mb: 2, ml: -15 }}
         />
 
         <Button
           variant="contained"
-          sx={{ m: 2, ml:-13}}
+          sx={{ m: 2, ml: -13 }}
           className="submit-button"
           onClick={() => {
             handleSubmit();
